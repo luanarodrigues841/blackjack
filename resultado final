@@ -1,0 +1,75 @@
+import java.util.*;
+
+class Baralho {
+    ArrayList<String> c = new ArrayList<>();
+    Random r = new Random();
+
+    Baralho() {
+        String[] v = {"A","2","3","4","5","6","7","8","9","10","J","Q","K"};
+        String[] n = {"♠","♥","♦","♣"};
+
+        for (String va : v)
+            for (String na : n)
+                c.add(va + " de " + na);
+    }
+
+    String comprar() {
+        return c.remove(r.nextInt(c.size()));
+    }
+}
+
+class Jogador {
+    String nome;
+    ArrayList<String> m = new ArrayList<>();
+
+    Jogador(String n) {
+        nome = n;
+    }
+
+    void pegar(String c) {
+        m.add(c);
+    }
+
+    int pontos() {
+        int t = 0;
+
+        for (String c : m) {
+            String v = c.split(" ")[0];
+
+            if (v.equals("A")) t += 11;
+            else if (v.equals("J") || v.equals("Q") || v.equals("K")) t += 10;
+            else t += Integer.parseInt(v);
+        }
+
+        return t;
+    }
+
+    void mostrar() {
+        System.out.println(nome + ": " + m + " = " + pontos());
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        Baralho b = new Baralho();
+        Jogador j = new Jogador("Você");
+        Jogador d = new Jogador("Dealer");
+
+        j.pegar(b.comprar());
+        j.pegar(b.comprar());
+        d.pegar(b.comprar());
+        d.pegar(b.comprar());
+
+        j.mostrar();
+        d.mostrar();
+
+        int pj = j.pontos(), pd = d.pontos();
+
+        if (pj > 21) System.out.println("Você perdeu!");
+        else if (pd > 21) System.out.println("Dealer perdeu!");
+        else if (pj > pd) System.out.println("Você ganhou!");
+        else if (pd > pj) System.out.println("Dealer ganhou!");
+        else System.out.println("Empate!");
+    }
+}

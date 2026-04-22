@@ -1,0 +1,31 @@
+class Jogador {
+    String nome;
+    ArrayList<String> mao = new ArrayList<>();
+
+    Jogador(String n) {
+        nome = n;
+    }
+
+    void pegar(String c) {
+        mao.add(c);
+    }
+
+    void mostrar() {
+        System.out.println(nome + ": " + mao);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        Jogador jogador = new Jogador("Você");
+        Jogador dealer = new Jogador("Dealer");
+
+        jogador.pegar("A de ♠");
+        jogador.pegar("10 de ♥");
+
+        dealer.pegar("K de ♦");
+
+        jogador.mostrar();
+        dealer.mostrar();
+    }

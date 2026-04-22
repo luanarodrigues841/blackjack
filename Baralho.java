@@ -10,4 +10,4 @@ public class Baralho {
             for (String naipe : naipes) {
                 String carta = valor + " de " + naipe;
             }
-
+        }}}
